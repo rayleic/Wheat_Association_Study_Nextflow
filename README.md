@@ -23,7 +23,7 @@ Phenotype + genotype
 ## Software
 
 - R
-- GAPIT 3
+- GAPIT 3 package
 - Nextflow
 - Git
 - Slurm-compatible configuration
