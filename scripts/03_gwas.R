@@ -1,14 +1,12 @@
-# ============================================================
 # 03_gwas.R
 #
 # Genome-wide association study of PlantHeight using:
 #   - RAW phenotype file
 #   - RAW HapMap genotype file
 #   - MLM
-#   - 5 PCs
-#   - kinship calculated internally by GAPIT
+#   - 5 PCs (adequate seeing the screeplot results)
+#   - kinship calculated by GAPIT
 #   - SNP MAF >= 0.05
-# ============================================================
 
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -28,25 +26,20 @@ source("http://zzlab.net/GAPIT/gapit_functions.txt")
 
 # ---- RAW phenotype ----
 #
-# GAPIT receives the original phenotype file directly.
-# We deliberately do not use the QC/metadata table here.
+# No suspicious outlier having been detected in the phenotype dataset, 
+# we input the original data files.
 
-myY <- read.delim(phenotype_file,
-  header = TRUE
-)
+myY <- read.delim(phenotype_file, header = TRUE)
 
 myY <- myY[, c("Taxa", "PlantHeight")]
 
 # ---- RAW HapMap ----
 
-myG <- read.table(genotype_file,
-  header = F
-)
+myG <- read.table(genotype_file, header = F)
 
 # ---- GWAS ----
 #
 # GAPIT performs the genotype/phenotype matching and SNP filtering.
-# Kinship is calculated internally, as in the successful standalone run.
 
 myGAPIT <- GAPIT(
   Y = myY,
