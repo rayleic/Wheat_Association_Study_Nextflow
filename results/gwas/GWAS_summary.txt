@@ -1,0 +1,2 @@
+n_tested	bonferroni_threshold	n_significant	PCs_used	MAF_threshold	model	kinship
+25619	1.951676490105e-06	2	5	0.05	MLM	GAPIT internal
