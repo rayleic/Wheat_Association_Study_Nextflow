@@ -1,20 +1,13 @@
-# ============================================================
 # 01_prepare_data.R
 #
-# Prepare the phenotype metadata used for the GWAS.
+# Phenotype quick statistical analysis before using it for the GWAS.
 #
 # Genotype filtering is deliberately left to GAPIT.
-# Country of origin is optional metadata and does not determine
-# whether an accession is retained for GWAS.
-# ============================================================
+# Country of origin is optional metadata and does not determine whether an accession is retained for GWAS.
 
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) != 3) {
-  stop(
-    "Usage: Rscript 01_prepare_data.R <phenotype> <genotype> <country>"
-  )
-}
+if (length(args) != 3) {stop("Usage: Rscript 01_prepare_data.R <phenotype> <genotype> <country>")}
 
 phenotype_file <- args[1]
 genotype_file  <- args[2]
@@ -33,8 +26,7 @@ pheno <- read.delim(
   phenotype_file,
   header = TRUE,
   stringsAsFactors = FALSE,
-  check.names = FALSE
-)
+  check.names = FALSE)
 
 country <- read.csv(
   country_file,
@@ -64,7 +56,6 @@ geno_taxa <- names(geno_header)[12:ncol(geno_header)]
 #   - it is present in the phenotype data,
 #   - it is present in the genotype data,
 #   - PlantHeight is not missing.
-#
 # Country of origin is not required.
 
 usable <- !is.na(pheno$PlantHeight) &
@@ -184,9 +175,7 @@ write.csv(
   row.names = FALSE
 )
 
-# ------------------------------------------------------------
 # Console summary
-# ------------------------------------------------------------
 
 cat("\n===== DATA PREPARATION =====\n")
 cat("Phenotype accessions:", length(phenotype_taxa), "\n")
