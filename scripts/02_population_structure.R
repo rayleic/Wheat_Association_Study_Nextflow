@@ -1,7 +1,6 @@
-# ============================================================
 # 02_population_structure.R
 #
-# Estimate population structure and kinship using GAPIT.
+# population structure and kinship estimation using GAPIT.
 #
 # Inputs:
 #   1. HapMap genotype file
@@ -15,7 +14,6 @@
 #   Kinship heatmap
 #
 # GAPIT handles SNP filtering (MAF >= 0.05).
-# ============================================================
 
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -27,10 +25,6 @@ if (length(args) != 2) {
 
 genotype_file <- args[1]
 metadata_file <- args[2]
-
-# ---- GAPIT initialization ----
-# Keep the same GAPIT loading commands that you used successfully
-# in your previous analyses.
 
 # GAPIT installation
 source("http://zzlab.net/GAPIT/GAPIT.library.R")
@@ -112,8 +106,7 @@ pca_meta <- merge(
   all.x = TRUE
 )
 
-# Broad geographic groups are used only to make PCA plots easier
-# to interpret. They are NOT used as GWAS covariates.
+# Broad geographic groups are used only to make PCA plots easier to interpret. They are not used as GWAS covariates.
 
 pca_meta$Region <- "Other/Unknown"
 
@@ -246,8 +239,7 @@ ggsave(
 
 # ---- Kinship heatmap ----
 #
-# No clustering is imposed here: this is simply a visualization
-# of pairwise genetic relatedness as estimated by GAPIT.
+# This is a visualization of pairwise genetic relatedness as estimated by GAPIT. It will be used in the MLM.
 
 png(
   "kinship_heatmap.png",
